@@ -1,55 +1,91 @@
-<html>
+<html lang="en">
     <head>
-       <link rel="stylesheet" href="index.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jimmi's Dinner</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Smythe&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="index.css">
     </head>
-    <header>
-        <div>
-        <h1>Jimmi's Dinner</h1>
-        <h3>Thebest burguers and pizza in town.</h3>
-        </div>
-       <!-- <img src='https://images.unsplash.com/photo-1616645500344-209060c84970?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt="burguer on the table">-->
-    </header>
     <body>
+     <header >
+        <div class="header-container">
+            <div class="title-letters">
+                <h1>Jimmi's Diner</h1>
+                <h2>Thebest burguers and pizza in town.</h2>
+            </div>
+            <img class="title-img" src='https://images.unsplash.com/photo-1616645500344-209060c84970?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt="burguer on the table">
+        </div>
+    </header>
+    <main>
         <section class="container-menu">
+
             <div class="food-box">
-                <p class="emoji">🍕<p>
+                <p class="emoji">🍕</p>
                 <div class="food-content">    
                     <h2>Pizza</h2>
-                    <h3>Pepperoni, mushrom, mozarella</h3>
-                    <h2>$14</h2>
+                    <p>Pepperoni, mushrom, mozarella</p>
+                    <h3>$14</h3>
+                </div>
+                <button type='button' class="food-btn" id="food-btn">+</button>
+            </div>
+
+            <div class="food-box">
+                <p class="emoji">🍕</p>
+                <div class="food-content">    
+                    <h2>Pizza</h2>
+                    <p>Pepperoni, mushrom, mozarella</p>
+                    <h3>$14</h3>
+                </div>
+                <button class="food-btn">+</button>
+            </div>
+            <div class="food-box">
+                <p class="emoji">🍕</p>
+                <div class="food-content">    
+                    <h2>Pizza</h2>
+                    <p>Pepperoni, mushrom, mozarella</p>
+                    <h3>$14</h3>
                 </div>
                 <button class="food-btn">+</button>
             </div>
         </section>
         <section class="container-order">
             <h2 class="order-title">Your Order</h2>
-            <div class="order-product">
-                <div>
-                    <h2>Pizza</h2>
-                    <button>Remove</button>
-                </div>
-                <h2>$14</h2>
-            </div>
+            <ul class="order-ul">
+                <li class="order-li">
+                    <div class="product-name">
+                        <h2>Pizza</h2>
+                        <button class="order-remove-btn">remove</button>
+                    </div>
+                    <div class="product-price">
+                        <h2>$14</h2>
+                    </div>
+                </li>
+                 <li class="order-li">
+                        <div class="product-name">
+                            <h2>Pizza</h2>
+                            <button class="order-remove-btn">remove</button>
+                        </div>
+                     <div class="product-price">
+                        <h2>$14</h2>
+                    </div>
+                </li>
+            </ul>
             <div class="order-total">
-                <ul>
-                    <li>
-                        <h2>Total Price: </h2>
-                        <h2 class="order-sum">$14..</h2>
-                    </li>
-                </ul>
-                <button class="order-complete">Complete order</button>
+                <h2>Total Price: </h2>
+                <h2 class="order-sum">$14</h2>
             </div>
-            
-            
+            <button class="order-complete-btn">Complete order</button>
         </section>
-	<script src="index.js" type='module'></script>
+        </main>
+        <div class="modal">
+            <form>
+                <label></label>
+                <input>
+            <form>
+        </div>
+    <script src="index.js" type='module'></script>
     </body>
-    <div class="modal">
-        <form>
-            <label></label>
-            <input>
-            
-        <form>
-    </div>
 </html>
 

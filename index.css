@@ -1,3 +1,206 @@
-body {
+html, body {
     margin: 0;
-} 
+    box-sizing: border-box;
+    font-family: "smythe", 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 100;
+    
+    
+}
+body {
+    border: 2px solid #8B8B8B;
+    width: 604px;
+    margin: 0 auto;
+}
+h1, h2, h3 {
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+}
+ h1 {
+    font-size: 39px;
+    font-weight: 100;
+    
+ }
+ h2 {
+    font-size: 22px;
+ }
+
+/*----header------------------*/
+
+.header-container {
+    border: 1px solid;
+    height: 167px;
+    width: 600px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.title-letters { 
+    padding-left: 46px;
+    color: white;
+    position: absolute;
+    z-index: 1;
+    line-height: px; 
+}
+
+.title-img {
+    position: relative;
+    width: 100%;
+    top:  -30;
+}
+header, main {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border-bottom: 1px solid #DEDEDE;
+}
+/*------------main---------------------*/
+
+.container-menu{
+    margin: 0;
+    padding: 25px 40px;
+    
+}
+.food-box{
+    display: flex;
+    border-bottom: 1px solid #DEDEDE; 
+    align-items: center;
+    padding: 40px 0;
+    margin: 0;
+    
+}
+.emoji{
+    margin: 0 0 6 0;
+    padding: 0;
+    font-size: 75px;
+}
+.food-content {
+    
+    line-height: 14px;
+    margin: 0;
+    padding: 16px 18px;
+}
+.food-content h2 , 
+.container-order h2 {
+    font-size: 28px;
+}
+.food-content h3 {
+    font-size: 20px;
+}
+.food-content p {
+    font-size: 16px;
+    color: #8B8B8B;
+
+}
+.food-btn {
+    border-radius: 50%;
+    font-family: serif;
+    font-size: 28px;
+    font-weight: 500;
+    background-color: white;
+    border: 2px solid #DEDEDE;
+    color: #3c3c3c;
+    width: 50px;
+    height: 50px;
+    margin-left: auto;  
+}
+
+
+/*---------order section 
+
+          <section class="container-order">
+            <h2 class="order-title">Your Order</h2>
+
+
+            <ul class="order-ul">
+                <li class="order-li">
+                        <div class="product-name">
+                            <h2>Pizza</h2>
+                            <button class="order-remove-btn">remove</button>
+                        <div>
+                     <div class="product-price">
+                        <h2>$14</h2>
+                    </div>
+                </li>
+            </ul>
+
+
+            <div class="order-total">
+                <h2>Total Price: </h2>
+                <h2 class="order-sum">$14</h2>
+            </div>
+            <button class="order-complete">Complete order</button>
+        </section>-----------------*/
+.container-order {
+    
+    padding: 0px 40px;
+    text-align: center;
+    height: 320;
+}
+.order-title {
+    padding-bottom: 50px;
+    
+}
+
+.order-ul , .order-li {
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+.order-li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.product-name {
+    display: flex;
+    align-items: center;
+    
+    padding: 0;
+    margin: 0;
+}
+
+.order-remove-btn {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    color: #BBBBBB;
+    background-color: white;
+    border: none;
+    padding: 0 0 0 8px;
+    margin: 3px 0 0 1px;
+    
+}
+.product-price {
+    margin-left: auto;
+}
+.order-total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 3px solid #3c3c3c;
+    padding: 10px 0 40px 0;
+    margin: 0;
+}
+
+.order-complete-btn {
+    background-color: #16DB99;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    height: 60px;
+    border-radius: 3px;
+    border: none;
+    padding: 0;
+}
+
+
+/*------------modal------------*/
+
+.modal{
+   
+}
