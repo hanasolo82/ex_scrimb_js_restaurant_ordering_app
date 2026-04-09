@@ -233,7 +233,7 @@ header, main {
     left: 0;
     right: 0;
     bottom: 0;
-    display: none; /*---complete order  display on--- (toggle)*>
+    display: none; /*---complete order  display on--- (toggle)*/
 }
 
 .input-field, .submit-btn {
@@ -275,4 +275,13 @@ input::placeholder, input:focus {
     font-size: 20px;
     padding-left: 29px;
     
+}
+.thanks-message {
+    font-size: 28px;
+    background-color: #ECFDF5;
+    color: #065F46;
+    height: 120px;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
 }
