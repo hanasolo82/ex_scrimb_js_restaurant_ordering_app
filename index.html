@@ -79,10 +79,40 @@
             <button class="order-complete-btn">Complete order</button>
         </section>
         </main>
-        <div class="modal">
+        <div class="modal" id="modal">
+            <!--Validation for every input-->
             <form>
-                <label></label>
-                <input>
+                <div class="input-field">
+                <h2 id="input-title">Enter card details</h2>
+                <input 
+                    type="text" 
+                    name="name-input"
+                    id="name-input"
+                    placeholder="Enter your name"
+                    required
+                    >
+                <input 
+                    type="number" 
+                    name="card-input"
+                    id="card-input"
+                    placeholder="Enter your card number"
+                    required
+                    >
+                <input 
+                    type="number" 
+                    name="cvv-input"
+                    id="cvv-input"
+                    placeholder="Enter CVV"
+                    required
+                    >
+                </div>
+                
+                    <button 
+                        class="submit-btn"
+                        type="submit"
+                        >Play
+                    </button>
+                
             <form>
         </div>
     <script src="index.js" type='module'></script>
