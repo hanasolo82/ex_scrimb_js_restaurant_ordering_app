@@ -20,16 +20,20 @@ import {menuArray} from "./data.js"
 el  addEventList reside como parametro de para una funcion que exporta el id si el id corresponde con el clicado */
 
 document.addEventListener('click', (e) => {
-  /*la funcion creada fuera se invoca aqui dentro y el parametro es  este */    targetId = e.target.id
+    /*aqui puedo poner cualquier funcion que quiero que reaccione con el click */
+     targetId(e.target)
+     addShoppingCarr(e.target.dataset.id)
     
 })
-
+function targetId(target) {
+    console.log(target.id)
+}
 
 /*Render zone---------*/
 
 function renderMenu() {
 
- return   menuArray.map((menu) => {
+ const renderMenuArr =   menuArray.map((menu) => {
 const {name, ingredients, id, price, emoji} = menu
         
     return  `<div class="food-box" id="${name}">
@@ -39,20 +43,37 @@ const {name, ingredients, id, price, emoji} = menu
                     <p>${ingredients.join(", ")}</p>
                     <h3>${price} $</h3>
                 </div>
-                <button type='button' class="food-btn" id="${id}-btn">+</button>
+                <button type='button' class="food-btn" data-id="${id}">+</button>
              </div>`
          }).join('')
+
+ return document.getElementById("main").innerHTML = `<section class="container-menu">${renderMenuArr}</section>`
 }
 
- document.getElementById("main").innerHTML = `<section class="container-menu">${renderMenu()}</section>`
 
+/*isProduct confirma si ya hay algun elemento añadido a la cesta, lo que permite renderizarla */
+const shoppingCarr = []
 
+function addShoppingCarr(productId) {
+    
+   const product = menuArray.find(menu=> menu.id === Number(productId))
+       
+        if(product) {
+            shoppingCarr.push(product)
+        }else { 
+            console.log("nothing added")
+        }
+/*el console log aqui funciona con cualquier otra funcion que renderice, aqui metere renderOrder */
+      console.log(shoppingCarr)
+}
+ console.log("out" + shoppingCarr)
 
 const renderOrder = () => {
     
 
-}
-/*       <section class="container-order">
+
+  const order =  `
+        <section class="container-order">
             <h2 class="order-title">Your Order</h2>
             <ul class="order-ul">
                 <li class="order-li">
@@ -70,4 +91,8 @@ const renderOrder = () => {
                 <h2 class="order-sum">$14</h2>
             </div>
             <button class="order-complete-btn">Complete order</button>
-        </section> */
+        </section>` 
+ document.getElementById('main').innerHTML += order
+}
+renderMenu()
+/*renderOrder() --------- renderiza con el primer producto añádido*/
