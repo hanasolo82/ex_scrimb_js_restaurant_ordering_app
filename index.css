@@ -137,7 +137,7 @@ header, main {
     
     padding: 0px 40px;
     text-align: center;
-    height: 320;
+    min-height: 320;
 }
 .order-title {
     padding-bottom: 50px;

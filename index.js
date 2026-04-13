@@ -16,25 +16,27 @@ Modal:
 Pendiente esta fase*/
 
 import {menuArray} from "./data.js"
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid'
 /*para manejar eventos e id hago lo siguiente 
 el  addEventList reside como parametro de para una funcion que exporta el id si el id corresponde con el clicado */
+const shoppingCarr = [] 
+
 
 document.addEventListener('click', (e) => {
     /*aqui puedo poner cualquier funcion que quiero que reaccione con el click */
-     targetId(e.target)
+     if(e.target.dataset.id) {
      addShoppingCarr(e.target.dataset.id)
-    
+     }
+     if(e.target.dataset.quit)
+     removeShoppingCarr(e.target.dataset.quit)
 })
-function targetId(target) {
-    console.log(target.id)
-}
 
 /*Render zone---------*/
 
-function renderMenu() {
+function renderAll() {
 
- const renderMenuArr =   menuArray.map((menu) => {
-const {name, ingredients, id, price, emoji} = menu
+const renderMenuArr =   menuArray.map((menu) => {
+    const {name, ingredients, id, price, emoji} = menu
         
     return  `<div class="food-box" id="${name}">
                 <p class="emoji">${emoji}</p>
@@ -47,52 +49,63 @@ const {name, ingredients, id, price, emoji} = menu
              </div>`
          }).join('')
 
- return document.getElementById("main").innerHTML = `<section class="container-menu">${renderMenuArr}</section>`
+const sectionContainerOrder = shoppingCarr.length > 0? `
+<section class="container-order">
+                    <h2 class="order-title">Your Order</h2>
+                    <ul class="order-ul" id="list-container"> 
+                        ${shoppingCarr.map(list => `
+                <li class="order-li">
+                    <div class="product-name">
+                        <h2>${list.name}</h2>
+                        <button class="order-remove-btn" data-quit ="${uuidv4()}">remove</button>
+                    </div>
+                    <div class="product-price">
+                        <h2>${list.price}$</h2>
+                    </div>
+                </li>
+                ` 
+                ).join('')}
+                    </ul>
+                    <div class="order-total">
+                        <h2>Total Price: </h2>
+                        <h2 class="order-sum">
+                         ${shoppingCarr.reduce((total, product) =>  total + product.price, 0)} $
+                        </h2>
+                    </div>
+                    <button class="order-complete-btn">Complete order</button>
+                </section> ` : ``
+
+ return document.getElementById("main").innerHTML = `
+
+                <section class="container-menu">
+                    ${renderMenuArr}             
+                </section>
+                    ${sectionContainerOrder}
+                `
 }
 
 
 /*isProduct confirma si ya hay algun elemento añadido a la cesta, lo que permite renderizarla */
-const shoppingCarr = []
 
 function addShoppingCarr(productId) {
-    
-   const product = menuArray.find(menu=> menu.id === Number(productId))
-       
+   
+   const product = menuArray.filter(menu=> menu.id === Number(productId))[0]    
         if(product) {
-            shoppingCarr.push(product)
-        }else { 
-            console.log("nothing added")
+            shoppingCarr.unshift(product)
         }
-/*el console log aqui funciona con cualquier otra funcion que renderice, aqui metere renderOrder */
-      console.log(shoppingCarr)
+     renderAll() /*renderiza la lista de los productos añadidos */
 }
- console.log("out" + shoppingCarr)
 
-const renderOrder = () => {
+function removeShoppingCarr(productId){
+    const product = shoppingCarr.findIndex(item => item.id != productId)
     
+        shoppingCarr.splice(product, 1)
+    
+    renderAll()
 
-
-  const order =  `
-        <section class="container-order">
-            <h2 class="order-title">Your Order</h2>
-            <ul class="order-ul">
-                <li class="order-li">
-                    <div class="product-name">
-                        <h2>Pizza</h2>
-                        <button class="order-remove-btn">remove</button>
-                    </div>
-                    <div class="product-price">
-                        <h2>$14</h2>
-                    </div>
-                </li>
-            </ul>
-            <div class="order-total">
-                <h2>Total Price: </h2>
-                <h2 class="order-sum">$14</h2>
-            </div>
-            <button class="order-complete-btn">Complete order</button>
-        </section>` 
- document.getElementById('main').innerHTML += order
 }
-renderMenu()
+
+
+
+renderAll()
 /*renderOrder() --------- renderiza con el primer producto añádido*/
