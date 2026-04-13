@@ -17,11 +17,15 @@ Pendiente esta fase*/
 
 import {menuArray} from "./data.js"
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid'
-/*para manejar eventos e id hago lo siguiente 
-el  addEventList reside como parametro de para una funcion que exporta el id si el id corresponde con el clicado */
+const confirmForm = document.getElementById("confirm-form")
+const submitBtn = document.getElementById("submit-btn")
+const targetInput = document.getElementById("card-input")
+const inputContainer = document.getElementById("input-field")
+ 
+
 const shoppingCarr = [] 
 
-
+/*  adding and removing  items from shopping card ---------------------------------------------*/
 document.addEventListener('click', (e) => {
     /*aqui puedo poner cualquier funcion que quiero que reaccione con el click */
      if(e.target.dataset.id) {
@@ -29,11 +33,98 @@ document.addEventListener('click', (e) => {
      }
      if(e.target.dataset.quit)
      removeShoppingCarr(e.target.dataset.quit)
+     if(e.target.dataset.call) {
+        renderModal()
+     }
 })
+
+function addShoppingCarr(productId) {
+    const product = menuArray.filter(menu=> menu.id === Number(productId))[0]    
+        if(product) {
+            shoppingCarr.unshift(product)
+        }
+    renderAll() /*renderiza la lista de los productos añadidos */
+}
+function removeShoppingCarr(productId){
+    const index = shoppingCarr.findIndex(item => item.id == productId)
+    shoppingCarr.splice(index, 1)
+    renderAll()/*renderiza la lista de los productos quitados */
+}
+
+/*form and inputs field ---------------------------------------------*/
+
+
+
+/*format target input field-----it's from chatGpt not mine*/
+targetInput.addEventListener("input", (e) =>{
+    const cursor = e.target.selectionStart
+        let value = e.target.value.replace(/\D/g, '').slice(0, 16)
+        let formatted = value.match(/.{1,4}/g)?.join(' ') || ''
+        e.target.value = formatted
+
+    // reubicar cursor 
+    e.target.setSelectionRange(cursor, cursor)
+
+})
+
 
 /*Render zone---------*/
 
+
+function renderModal() {
+document.getElementById("modal").classList.toggle("display")
+submitBtn.disabled = false
+
+
+    submitBtn.addEventListener("click", (e) => {
+         if (!confirmForm.checkValidity()) {
+        
+        return // deja que el navegador muestre error
+    }
+        e.preventDefault()
+        submitBtn.disabled = true
+        const confirmFormData = new FormData(confirmForm)
+        const  inputName = confirmFormData.get("name-input")
+
+        const loadindDots = `
+        
+                <h2 id="input-title">Your order is comming...</h2>
+                <img src="https://media.tenor.com/aTBicXrcp70AAAAi/loading-discord-grey.gif">`
+
+        inputContainer.innerHTML = loadindDots
+        
+        setTimeout(()=> {
+
+            inputContainer.innerHTML = `
+                    <h2 id="input-title">Hitting the food..</h2>
+                    <img src="https://media.tenor.com/aTBicXrcp70AAAAi/loading-discord-grey.gif">`
+
+            shoppingCarr.length = 0
+        
+            setTimeout(()=> {
+                document.getElementById("modal").classList.toggle("display")
+                document.getElementById("container-order").innerHTML = `
+                    <div class="thanks-message">
+                        <p>Thanks ${inputName},! Your order is on its way!</p>
+                    </div>
+
+                `
+            
+            }, 3000)
+
+
+        }, 1000)
+       
+        
+    })
+    
+}
+
+
+
 function renderAll() {
+
+
 
 const renderMenuArr =   menuArray.map((menu) => {
     const {name, ingredients, id, price, emoji} = menu
@@ -50,7 +141,7 @@ const renderMenuArr =   menuArray.map((menu) => {
          }).join('')
 
 const sectionContainerOrder = shoppingCarr.length > 0? `
-<section class="container-order">
+<section class="container-order" id="container-order">
                     <h2 class="order-title">Your Order</h2>
                     <ul class="order-ul" id="list-container"> 
                         ${shoppingCarr.map(list => `
@@ -72,8 +163,8 @@ const sectionContainerOrder = shoppingCarr.length > 0? `
                          ${shoppingCarr.reduce((total, product) =>  total + product.price, 0)} $
                         </h2>
                     </div>
-                    <button class="order-complete-btn">Complete order</button>
-                </section> ` : ``
+                    <button class="order-complete-btn" id="complete-btn" data-call=${uuidv4()}>Complete order</button>
+                </section> ` : ``            
 
  return document.getElementById("main").innerHTML = `
 
@@ -83,29 +174,6 @@ const sectionContainerOrder = shoppingCarr.length > 0? `
                     ${sectionContainerOrder}
                 `
 }
-
-
-/*isProduct confirma si ya hay algun elemento añadido a la cesta, lo que permite renderizarla */
-
-function addShoppingCarr(productId) {
-   
-   const product = menuArray.filter(menu=> menu.id === Number(productId))[0]    
-        if(product) {
-            shoppingCarr.unshift(product)
-        }
-     renderAll() /*renderiza la lista de los productos añadidos */
-}
-
-function removeShoppingCarr(productId){
-    const product = shoppingCarr.findIndex(item => item.id != productId)
-    
-        shoppingCarr.splice(product, 1)
-    
-    renderAll()
-
-}
-
-
 
 renderAll()
 /*renderOrder() --------- renderiza con el primer producto añádido*/

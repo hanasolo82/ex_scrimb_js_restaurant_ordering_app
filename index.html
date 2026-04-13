@@ -90,10 +90,10 @@
         </section>
  --> 
         </main>
-        <div class="modal" id="modal">
+        <div class="modal display" id="modal">
             <!--Validation for every input-->
-            <form>
-                <div class="input-field">
+            <form id="confirm-form">
+                <div class="input-field" id="input-field">
                 <h2 id="input-title">Enter card details</h2>
                 <input 
                     type="text" 
@@ -101,26 +101,32 @@
                     id="name-input"
                     placeholder="Enter your name"
                     required
+                    autofocus
                     >
                 <input 
-                    type="number" 
+                    type="text"
                     name="card-input"
                     id="card-input"
                     placeholder="Enter your card number"
+                    maxlength="19"
                     required
                     >
                 <input 
-                    type="number" 
+                    type="text" 
                     name="cvv-input"
                     id="cvv-input"
                     placeholder="Enter CVV"
+                    pattern="[0-9]{3}"
+                    maxlength="3"
                     required
                     >
                 </div>
                 
                     <button 
                         class="submit-btn"
+                        id="submit-btn"
                         type="submit"
+                        disabled
                         >Play
                     </button>
                 
